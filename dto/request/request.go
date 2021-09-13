@@ -1,4 +1,4 @@
-package dto
+package request
 
 type WritePost struct {
 	Title   string `json:"title"`

@@ -3,11 +3,11 @@ package utils
 import (
 	"net/http"
 
-	"github.com/GoAPI-server/dto"
+	"github.com/GoAPI-server/dto/response"
 )
 
 func BadRequest(rw http.ResponseWriter) {
-	res := dto.ErrorRes{
+	res := response.ErrorRes{
 		Status:  400,
 		Message: "Bad request",
 	}
