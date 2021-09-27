@@ -32,6 +32,7 @@ func Start(aPort int) {
 
 	router.HandleFunc("/post", post.WritePost).Methods("POST")
 	router.HandleFunc("/post/{pageNum}", post.ReadPost).Methods("GET")
+	router.HandleFunc("/post/{postId}", post.UpdatePost).Methods("PUT")
 
 	logger.Infof("Listening on http://localhost%s\n", port)
 	log.Fatal(http.ListenAndServe(port, router))

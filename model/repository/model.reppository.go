@@ -25,7 +25,22 @@ func GetAllPosts(pageNum int) ([]*model.Post, error) {
 
 	posts := make([]*model.Post, 0)
 
-	err := d.Find(&posts).Limit(20).Offset(20 * pageNum).Error
+	err := d.Limit(20).Offset(20 * pageNum).Find(&posts).Error
 
 	return posts, err
+}
+
+func UpdatePost(postId int64, updatePost request.UpdatePost) error {
+	d := db.GetDB()
+
+	post := model.Post{}
+
+	err := d.Where("id = ?", postId).Find(&post).Error
+
+	post.Title = updatePost.Title
+	post.Content = updatePost.Content
+
+	d.Save(&post)
+
+	return err
 }

@@ -48,3 +48,23 @@ func ReadPost(rw http.ResponseWriter, r *http.Request) {
 		logger.Error("failed encode")
 	}
 }
+
+func UpdatePost(rw http.ResponseWriter, r *http.Request) {
+	var data request.UpdatePost
+	str := mux.Vars(r)["postId"]
+	postId, _ := strconv.ParseInt(str, 10, 64)
+
+	err := json.NewDecoder(r.Body).Decode(&data)
+
+	if err != nil {
+		utils.BadRequest(rw)
+		logger.Error("bad request")
+		return
+	}
+
+	err = repository.UpdatePost(postId, data)
+
+	if err != nil {
+		utils.PostNotFound(rw)
+	}
+}

@@ -26,7 +26,7 @@ func InitDB() error {
 	db, err := gorm.Open(mysql.Open(dnsn), &gorm.Config{})
 
 	if err != nil {
-		logger.Infof("Failed to open database")
+		logger.Error("Failed to open database")
 		return err
 	}
 
